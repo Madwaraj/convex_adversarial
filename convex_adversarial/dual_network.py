@@ -32,12 +32,9 @@ class DualNetwork(nn.Module):
             raise ValueError("Network must be a nn.Sequential or DenseSequential module")
         with torch.no_grad(): 
             if any('BatchNorm2d' in str(l.__class__.__name__) for l in net):  ## l.__class__.__name__ means the __name__ attribute of the __class__ attribute, of l
-                zs = [X]
+                zs = [X]     #Probably appends X to zs. (Confirm this)
             else:
-                print("zs Before",zs)
-                print("X before", X)
-                zs = [X[:1]]
-                print("zs After",zs)
+                zs = [X[:1]]   #Probably appends 2nd column of X to zs. (Confirm append part)
             nf = [zs[0].size()]
             for l in net: 
                 if isinstance(l, Dense): 
