@@ -31,10 +31,13 @@ class DualNetwork(nn.Module):
         if not isinstance(net, (nn.Sequential, DenseSequential)): 
             raise ValueError("Network must be a nn.Sequential or DenseSequential module")
         with torch.no_grad(): 
-            if any('BatchNorm2d' in str(l.__class__.__name__) for l in net): 
+            if any('BatchNorm2d' in str(l.__class__.__name__) for l in net):  ## l.__class__.__name__ means the __name__ attribute of the __class__ attribute, of l
                 zs = [X]
             else:
+                print("zs Before",zs)
+                print("X before", X)
                 zs = [X[:1]]
+                print("zs After",zs)
             nf = [zs[0].size()]
             for l in net: 
                 if isinstance(l, Dense): 
