@@ -71,7 +71,7 @@ class InfBallBounded(DualObject):
         self.l = (X-epsilon).clamp(min=l).view(X.size(0), 1, -1)
         self.u = (X+epsilon).clamp(max=u).view(X.size(0), 1, -1)
 
-        n = X[0].numel()
+        n = X[0].numel()     #numel is the same as sizeof
         self.nu_x = [X] 
         self.nu_1 = [X.new(n,n)]
         torch.eye(n, out=self.nu_1[0])
