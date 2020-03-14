@@ -69,7 +69,7 @@ class InfBallBounded(DualObject):
         super(InfBallBounded, self).__init__()
         self.epsilon = epsilon
         self.l = (X-epsilon).clamp(min=l).view(X.size(0), 1, -1)    #Figure out what clamp does
-        self.u = (X+epsilon).clamp(max=u).view(X.size(0), 1, -1)
+        self.u = (X+epsilon).clamp(max=u).view(X.size(0), 1, -1)    #view reshapes "u" to have 1 column and "-1" reshapes the no. of rows
 
         n = X[0].numel()     #numel is the same as sizeof
         self.nu_x = [X] 
