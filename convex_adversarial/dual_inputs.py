@@ -68,7 +68,7 @@ class InfBallBounded(DualObject):
     def __init__(self, X, epsilon, l=0, u=1): 
         super(InfBallBounded, self).__init__()
         self.epsilon = epsilon
-        self.l = (X-epsilon).clamp(min=l).view(X.size(0), 1, -1)
+        self.l = (X-epsilon).clamp(min=l).view(X.size(0), 1, -1)    #Figure out what clamp does
         self.u = (X+epsilon).clamp(max=u).view(X.size(0), 1, -1)
 
         n = X[0].numel()     #numel is the same as sizeof
