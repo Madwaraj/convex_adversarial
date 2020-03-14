@@ -68,8 +68,8 @@ class InfBallBounded(DualObject):
     def __init__(self, X, epsilon, l=0, u=1): 
         super(InfBallBounded, self).__init__()
         self.epsilon = epsilon
-        self.l = (X-epsilon).clamp(min=l).view(X.size(0), 1, -1)    #Figure out what clamp does
-        self.u = (X+epsilon).clamp(max=u).view(X.size(0), 1, -1)    #view reshapes "u" to have 1 column and "-1" reshapes the no. of rows
+        self.l = (X-epsilon).clamp(min=l).view(X.size(0), 1, -1)    #Figure out what clamp does (probably fixes 1 extreme value)
+        self.u = (X+epsilon).clamp(max=u).view(X.size(0), 1, -1)    #view reshapes "u" into a 3D tensor to have 1 column and "-1" reshapes the no. of rows
 
         n = X[0].numel()     #numel is the same as sizeof. so it basically gives the number of columns in X.
         self.nu_x = [X] 
