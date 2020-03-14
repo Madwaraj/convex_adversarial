@@ -78,7 +78,7 @@ class InfBallBounded(DualObject):
         self.nu_1[0] = self.nu_1[0].view(-1,*X.size()[1:]).unsqueeze(0)     #unsqueeze adds extra dimension. Example, dimensio chages from (x,) to (1, x)(when parameter is 0).
 
     def apply(self, dual_layer): 
-        self.nu_x.append(dual_layer(*self.nu_x))
+        self.nu_x.append(dual_layer(*self.nu_x))      #Daul layer - Apply forward pass to the given inputs
         self.nu_1.append(dual_layer(*self.nu_1))
 
     def bounds(self, network=None): 
