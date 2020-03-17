@@ -93,7 +93,8 @@ class RobustBounds(nn.Module):
     def forward(self, X,y): 
         num_classes = self.net[-1].out_features
         dual = DualNetwork(self.net, X, self.epsilon, **self.kwargs)
-        c = Variable(torch.eye(num_classes).type_as(X)[y].unsqueeze(1) - torch.eye(num_classes).type_as(X).unsqueeze(0))
+        # See what the following line is doing. WHat equation?
+        c = Variable(torch.eye(num_classes).type_as(X)[y].unsqueeze(1) - torch.eye(num_classes).type_as(X).unsqueeze(0))  
         if X.is_cuda:
             c = c.cuda()
         f = -dual(c)
@@ -109,7 +110,7 @@ def robust_loss(net, epsilon, X, y,
     err = (f.max(1)[1] != y)
     if size_average: 
         err = err.sum().item()/X.size(0)
-    ce_loss = nn.CrossEntropyLoss(reduction=reduction)(f, y)
+    ce_loss = nn.CrossEntropyLoss(reduction=reduction)(f, y)  #What is reduction?
     return ce_loss, err
 
 class InputSequential(nn.Sequential): 
