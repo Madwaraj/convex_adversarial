@@ -66,8 +66,8 @@ class DualNetwork(nn.Module):
         """ For the constructed given dual network, compute the objective for
         some given vector c """
         nu = [-c]
-        nu.append(self.last_layer.T(*nu))
-        for l in reversed(self.dual_net[1:]): 
+        nu.append(self.last_layer.T(*nu))   #This is nu_k = -c
+        for l in reversed(self.dual_net[1:]):    #This loop is probably for backprop
             nu.append(l.T(*nu))
         dual_net = self.dual_net + [self.last_layer]
         
