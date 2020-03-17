@@ -7,7 +7,7 @@ from .utils import full_bias, Dense
 
 def select_layer(layer, dual_net, X, proj, norm_type, in_f, out_f, zsi,
                  zl=None, zu=None):
-    if isinstance(layer, nn.Linear): 
+    if isinstance(layer, nn.Linear):       
         return DualLinear(layer, out_f)
     elif isinstance(layer, nn.Conv2d): 
         return DualConv2d(layer, out_f)
@@ -40,7 +40,7 @@ def unbatch(A):
 
 class DualLinear(DualLayer): 
     def __init__(self, layer, out_features): 
-        super(DualLinear, self).__init__()
+        super(DualLinear, self).__init__()   #super() givesaccess to methods in a superclass from the subclass that inherits from it.
         if not isinstance(layer, nn.Linear):
             raise ValueError("Expected nn.Linear input.")
         self.layer = layer
