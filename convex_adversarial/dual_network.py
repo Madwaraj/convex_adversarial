@@ -33,6 +33,7 @@ class DualNetwork(nn.Module):
         with torch.no_grad(): 
             if any('BatchNorm2d' in str(l.__class__.__name__) for l in net):  ## l.__class__.__name__ means the __name__ attribute of the __class__ attribute, of l
                 zs = [X]     #Probably appends X to zs. (Confirm this)
+                #Paper section 3.1 - "z1 = x"
             else:
                 zs = [X[:1]]   #Probably appends 2nd column of X to zs. (Confirm append part)
             nf = [zs[0].size()]
