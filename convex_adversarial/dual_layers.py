@@ -181,7 +181,7 @@ class DualReLU(DualLayer):
         d = (zl >= 0).detach().type_as(zl)
         I = ((zu > 0).detach() * (zl < 0).detach())
         if I.sum().item() > 0:
-            d[I] += zu[I]/(zu[I] - zl[I])
+            d[I] += zu[I]/(zu[I] - zl[I])   #Calculating alpha from equation 8
 
         n = d[0].numel()
         if I.sum().item() > 0: 
