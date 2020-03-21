@@ -70,9 +70,10 @@ class InfBallBounded(DualObject):
         self.epsilon = epsilon
         self.l = (X-epsilon).clamp(min=l).view(X.size(0), 1, -1)    #Figure out what clamp does (probably fixes 1 extreme value)
         self.u = (X+epsilon).clamp(max=u).view(X.size(0), 1, -1)    #view reshapes "u" into a 3D tensor to have 1 column and "-1" reshapes the no. of rows
-
+        #This is perturbing the input by epsilon. But why the limit between 0 and 1?
+        
         n = X[0].numel()     #numel is the same as sizeof. so it basically gives the number of columns in X.
-        self.nu_x = [X] 
+        self.nu_x = [X]   #
         self.nu_1 = [X.new(n,n)]    #What does new do?
         torch.eye(n, out=self.nu_1[0])
         self.nu_1[0] = self.nu_1[0].view(-1,*X.size()[1:]).unsqueeze(0)     #unsqueeze adds extra dimension. Example, dimensio chages from (x,) to (1, x)(when parameter is 0).
