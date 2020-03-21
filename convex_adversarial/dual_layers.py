@@ -71,7 +71,7 @@ class DualLinear(DualLayer):
         else:
             nu = nus[-2]
             nu = nu.view(nu.size(0), nu.size(1), -1)
-            return -nu.matmul(self.bias[0].view(-1))
+            return -nu.matmul(self.bias[0].view(-1))    #I think this is the 1st term of the dual problem.
 
     def forward(self, *xs): 
         x = xs[-1]
