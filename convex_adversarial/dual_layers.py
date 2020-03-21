@@ -177,7 +177,7 @@ class DualReLU(DualLayer):
     def __init__(self, zl, zu): 
         super(DualReLU, self).__init__()
 
-
+        # detach() detaches the output from the computationnal graph. So no gradient will be backproped along this variable
         d = (zl >= 0).detach().type_as(zl)
         I = ((zu > 0).detach() * (zl < 0).detach())
         if I.sum().item() > 0:
