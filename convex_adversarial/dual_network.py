@@ -95,6 +95,7 @@ class RobustBounds(nn.Module):
         num_classes = self.net[-1].out_features
         dual = DualNetwork(self.net, X, self.epsilon, **self.kwargs)
         # See what the following line is doing. What equation?
+        #Paper - page 4, lagrangian "c"
         c = Variable(torch.eye(num_classes).type_as(X)[y].unsqueeze(1) - torch.eye(num_classes).type_as(X).unsqueeze(0))  
         if X.is_cuda:
             c = c.cuda()
