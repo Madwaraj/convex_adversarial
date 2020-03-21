@@ -77,13 +77,13 @@ class DualLinear(DualLayer):
         x = xs[-1]
         if x is None: 
             return None
-        return F.linear(x, self.layer.weight)
+        return F.linear(x, self.layer.weight)     
 
     def T(self, *xs): 
         x = xs[-1]
         if x is None:
             return None
-        return F.linear(x, self.layer.weight.t())
+        return F.linear(x, self.layer.weight.t())   #This or the upper one is probably the 2nd term of dual problem
 
 # Convolutional helper functions to minibatch large inputs for CuDNN
 def conv2d(x, *args, **kwargs): 
