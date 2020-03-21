@@ -11,7 +11,7 @@ def select_layer(layer, dual_net, X, proj, norm_type, in_f, out_f, zsi,
         return DualLinear(layer, out_f)
     elif isinstance(layer, nn.Conv2d): 
         return DualConv2d(layer, out_f)
-    elif isinstance(layer, nn.ReLU):   
+    elif isinstance(layer, nn.ReLU):       #Fixing the bounds l and u for ReLU approximation  
         if zl is None and zu is None:
             zl, zu = zip(*[l.bounds() for l in dual_net])
             zl, zu = sum(zl), sum(zu)
