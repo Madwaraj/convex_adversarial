@@ -90,6 +90,7 @@ class InfBallBounded(DualObject):
         nu_pos = nu.clamp(min=0).view(nu.size(0), nu.size(1), -1)
         nu_neg = nu.clamp(max=0).view(nu.size(0), nu.size(1), -1)
 
+        #These are the upper and lower RELU bounds if its not explicitly given. Find out which equation is this?
         zu = (self.u.matmul(nu_pos) + self.l.matmul(nu_neg)).squeeze(1)      #2nd and 3rd term of equation 30
         zl = (self.u.matmul(nu_neg) + self.l.matmul(nu_pos)).squeeze(1).     #No idea why this is here
         return (zl.view(zl.size(0), *nu.size()[2:]), 
