@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from .dual import DualLayer
 from .utils import full_bias, Dense
 
-def select_layer(layer, dual_net, X, proj, norm_type, in_f, out_f, zsi,    #dual_net here is epsilon
+def select_layer(layer, dual_net, X, proj, norm_type, in_f, out_f, zsi,    
                  zl=None, zu=None):       
     if isinstance(layer, nn.Linear):       
         return DualLinear(layer, out_f)
