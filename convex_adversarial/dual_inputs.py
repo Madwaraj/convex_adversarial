@@ -91,7 +91,7 @@ class InfBallBounded(DualObject):
         nu_neg = nu.clamp(max=0).view(nu.size(0), nu.size(1), -1)
 
         zu = (self.u.matmul(nu_pos) + self.l.matmul(nu_neg)).squeeze(1)      #2nd and 3rd term of equation 30
-        zl = (self.u.matmul(nu_neg) + self.l.matmul(nu_pos)).squeeze(1)
+        zl = (self.u.matmul(nu_neg) + self.l.matmul(nu_pos)).squeeze(1).     #No idea why this is here
         return (zl.view(zl.size(0), *nu.size()[2:]), 
                 zu.view(zu.size(0), *nu.size()[2:]))
 
